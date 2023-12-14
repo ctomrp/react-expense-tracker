@@ -1,14 +1,22 @@
 import { useDispatch, useSelector } from "react-redux";
 import s from "./style.module.css";
-import { setIncomeAction } from "store/expense/expense-slice";
+import { setIncomeAction, noIncomeAction } from "store/expense/expense-slice";
 
 export function IncomeInput(props) {
-  const income = useSelector((store) => store.EXPENSE.income);
   const dispatch = useDispatch();
+  const income = useSelector((store) => store.EXPENSE.income);
   const formattedIncome = isNaN(income) ? "" : income.toFixed(2);
 
   function setIncome(e) {
-    dispatch(setIncomeAction(Number.parseFloat(e.target.value)));
+    const value = e.target.value;
+
+    if (!value || isNaN(value)) {
+      dispatch(setIncomeAction(0));
+      dispatch(noIncomeAction(true));
+    } else {
+      dispatch(setIncomeAction(Number.parseFloat(value)));
+      dispatch(noIncomeAction(false));
+    }
   }
 
   return (

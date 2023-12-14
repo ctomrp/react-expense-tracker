@@ -4,6 +4,7 @@ export const expenseSlice = createSlice({
   name: "expenseSlice",
   initialState: {
     income: 1000,
+    noIncome: false,
     expenseList: [],
     countActionPerformed: 0,
   },
@@ -14,11 +15,19 @@ export const expenseSlice = createSlice({
     setIncomeAction: (currentSlice, action) => {
       currentSlice.income = action.payload;
     },
-    incrementActionPerformed: (currentSlice, action) => {
+    noIncomeAction: (currentSlice) => {
+      currentSlice.noIncome =
+        !currentSlice.income || isNaN(currentSlice.income);
+    },
+    incrementActionPerformed: (currentSlice) => {
       currentSlice.countActionPerformed++;
     },
   },
 });
 
-export const { addExpenseAction, setIncomeAction, incrementActionPerformed } =
-  expenseSlice.actions;
+export const {
+  addExpenseAction,
+  setIncomeAction,
+  noIncomeAction,
+  incrementActionPerformed,
+} = expenseSlice.actions;

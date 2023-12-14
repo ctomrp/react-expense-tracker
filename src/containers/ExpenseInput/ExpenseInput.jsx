@@ -1,10 +1,11 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import s from "./style.module.css";
 import { addExpenseAction } from "store/expense/expense-slice";
 import { useState } from "react";
 
 export function ExpenseInput(props) {
   const dispatch = useDispatch();
+  const noIncome = useSelector((store) => store.EXPENSE.noIncome);
   const [expenseName, setExpenseName] = useState("");
   const [price, setPrice] = useState("");
 
@@ -35,6 +36,7 @@ export function ExpenseInput(props) {
             onChange={(e) => {
               setExpenseName(e.target.value);
             }}
+            disabled={noIncome}
           />
         </div>
         <div className="col-12 col-sm-2 col-md-4 col-lg-4 mb-2">
@@ -48,15 +50,21 @@ export function ExpenseInput(props) {
             onChange={(e) => {
               setPrice(e.target.value);
             }}
+            disabled={noIncome}
           />
         </div>
 
         <div className="col-12 col-sm-2 col-md-4 col-lg-4 mb-2">
-          <button type="submit" className={`btn btn-primary ${s.btn}`}>
+          <button
+            type="submit"
+            className={`btn btn-primary ${s.btn}`}
+            disabled={noIncome}
+          >
             Add
           </button>
         </div>
       </div>
+      {noIncome ? <p className={s.noIncome}>You have no income</p> : <></>}
     </form>
   );
 }
