@@ -4,13 +4,18 @@ import { ExpenseInput } from "containers/ExpenseInput/ExpenseInput";
 import { ExpenseList } from "containers/ExpenseList/ExpenseList";
 import { IncomeInput } from "containers/IncomeInput/IncomeInput";
 import { Logo } from "components/Logo/Logo";
+import piggy from "./assets/images/piggy-bank.png";
 
 export function App() {
   return (
     <div className={s.main_container}>
       <div className={`row ${s.header}`}>
         <div className={`col-3`}>
-          <Logo title={"ISpent"} subtitle={"Track your expenses"} />
+          <Logo
+            image={piggy}
+            title={"ISpent"}
+            subtitle={"Track your expenses"}
+          />
         </div>
         <div className={`col-9 ${s.income_input}`}>
           <IncomeInput />

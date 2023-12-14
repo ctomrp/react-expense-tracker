@@ -12,7 +12,7 @@ export function ExpenseInput(props) {
     e.preventDefault();
     //como price y price tienen el mismo nombre, podria usar solo un price en lugar de price: price
     try {
-      if (expenseName.length > 0 && !isNaN(price)) {
+      if (String(expenseName.length) > 0 && !isNaN(Number.parseFloat(price))) {
         dispatch(addExpenseAction({ name: expenseName, price }));
         setExpenseName("");
         setPrice("");
